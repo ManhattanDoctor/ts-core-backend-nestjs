@@ -32,7 +32,6 @@ export class ExtendedErrorFilter implements IExceptionFilter<ExtendedError> {
         if (exception.code in HttpStatus) {
             status = exception.code;
         }
-
         response.status(status).json(TransformUtil.fromClass(exception));
     }
 
