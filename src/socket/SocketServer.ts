@@ -77,6 +77,7 @@ export abstract class SocketServer extends LoggerWrapper implements OnGatewayIni
     }
 }
 
+
 export const originAnyPreflightHandler = (request, response) => {
     response.writeHead(200, {
         'Access-Control-Allow-Headers': 'Content-Type, Authorization',
