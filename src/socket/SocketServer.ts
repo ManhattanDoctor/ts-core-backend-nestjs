@@ -50,6 +50,7 @@ export abstract class SocketServer extends LoggerWrapper implements OnGatewayIni
     // --------------------------------------------------------------------------
 
     public afterInit(item: Namespace): any {
+        this.log(`Initialized on namespace "${item.name}"`);
         this.namespace = item;
     }
 
@@ -76,7 +77,6 @@ export abstract class SocketServer extends LoggerWrapper implements OnGatewayIni
         return !_.isNil(this.namespace);
     }
 }
-
 
 export const originAnyPreflightHandler = (request, response) => {
     response.writeHead(200, {
