@@ -4,7 +4,8 @@ import { LoggerWrapper } from '@ts-core/common/logger';
 import * as _ from 'lodash';
 import { Namespace, Socket } from 'socket.io';
 
-export abstract class SocketServer extends LoggerWrapper implements OnGatewayInit<Namespace>, OnGatewayConnection<Socket>, OnGatewayDisconnect<Socket> {
+export abstract class SocketServer<T = any> extends LoggerWrapper
+    implements OnGatewayInit<Namespace>, OnGatewayConnection<Socket>, OnGatewayDisconnect<Socket> {
     // --------------------------------------------------------------------------
     //
     //  Properties
@@ -19,9 +20,11 @@ export abstract class SocketServer extends LoggerWrapper implements OnGatewayIni
     //
     // --------------------------------------------------------------------------
 
-    protected async clientVerify(client: Socket): Promise<void> {}
+    protected async clientVerify(client: Socket): Promise<T> {
+        return {} as T;
+    }
 
-    protected async clientVerifySucceedHandler(client: Socket): Promise<void> {}
+    protected async clientVerifySucceedHandler(client: Socket, result: T): Promise<void> {}
 
     protected async clientVerifyFailedHandler(client: Socket, error: ExtendedError): Promise<void> {
         client.disconnect(true);
@@ -56,8 +59,7 @@ export abstract class SocketServer extends LoggerWrapper implements OnGatewayIni
 
     public async handleConnection(client: Socket): Promise<any> {
         try {
-            await this.clientVerify(client);
-            this.clientVerifySucceedHandler(client);
+            this.clientVerifySucceedHandler(client, await this.clientVerify(client));
         } catch (error) {
             this.clientVerifyFailedHandler(client, ExtendedError.create(error));
         }
