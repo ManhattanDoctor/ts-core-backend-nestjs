@@ -1,1 +1,2 @@
-export * from './ConvertMethod';
+export * from './ConvertRequestMethod';
+export * from './GetRequestDataMethod';
