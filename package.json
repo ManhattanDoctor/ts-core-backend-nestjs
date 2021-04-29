@@ -1,6 +1,6 @@
 {
     "name": "@ts-core/backend-nestjs",
-    "version": "6.0.24",
+    "version": "6.0.25",
     "description": "Classes and utils for backend based on nestjs",
     "main": "index.js",
     "scripts": {},
