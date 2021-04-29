@@ -19,7 +19,8 @@ export class CacheModule {
             },
             {
                 provide: Cache,
-                useValue: CACHE_MANAGER
+                inject: [CACHE_MANAGER],
+                useFactory: item => item
             }
         ];
         return {
