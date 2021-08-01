@@ -23,7 +23,7 @@
         "@nestjs/typeorm": "6.3.4",
         "@nestjs/websockets": "6.10.11",
         "@ts-core/backend": "^1.0.52",
-        "@ts-core/common": "^1.0.176",
+        "@ts-core/common": "^1.0.180",
         "@types/socket.io": "2.1.4",
         "passport": "0.4.1",
         "passport-http-bearer": "1.0.1",
