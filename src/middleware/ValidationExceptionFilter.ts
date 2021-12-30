@@ -8,26 +8,6 @@ import { IExceptionFilter } from './IExceptionFilter';
 export class ValidationExceptionFilter implements IExceptionFilter<ValidationException> {
     // --------------------------------------------------------------------------
     //
-    //  Static Methods
-    //
-    // --------------------------------------------------------------------------
-
-    public static throwExceptionIfNeed(items: Array<ValidationError>, code: number = ExtendedError.HTTP_CODE_BAD_REQUEST): void {
-        if (_.isEmpty(items)) {
-            return;
-        }
-        throw {
-            status: code,
-            message: ValidateUtil.toString(items),
-            response: {
-                message: items,
-                statusCode: code
-            }
-        };
-    }
-
-    // --------------------------------------------------------------------------
-    //
     //  Public Methods
     //
     // --------------------------------------------------------------------------
