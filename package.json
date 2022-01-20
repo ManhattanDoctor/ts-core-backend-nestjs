@@ -14,14 +14,13 @@
         "@nestjs/core": "^8.2.5",
         "@nestjs/platform-socket.io": "^8.2.6",
         "@nestjs/websockets": "^8.2.6",
-        "@ts-core/backend": "^1.0.59",
-        "@ts-core/common": "^1.0.191",
+        "@ts-core/backend": "^2.0.2",
+        "@ts-core/common": "^2.0.1",
         "cache-manager": "^3.6.0",
         "cli-color": "^2.0.1"
     },
     "devDependencies": {
-        "typescript": "^4.5.4",
-        "gulp-npm-publisher": "^1.0.4"
+        "gulp-npm-publisher": "^2.0.2"
     },
     "repository": {
         "type": "git",
