@@ -19,6 +19,7 @@
         "cache-manager": "^3.6.0",
         "cli-color": "^2.0.1"
     },
+    
     "devDependencies": {
         "typescript": "^4.5.4",
         "gulp-npm-publisher": "^1.0.4"
