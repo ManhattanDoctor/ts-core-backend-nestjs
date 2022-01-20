@@ -21,9 +21,8 @@ export class LoggerModule {
 
         return {
             module: LoggerModule,
-            imports: [],
+            exports: providers,
             providers,
-            exports: providers
         };
     }
 }

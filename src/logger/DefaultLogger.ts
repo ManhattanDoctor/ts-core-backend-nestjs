@@ -1,4 +1,4 @@
-import { Logger } from '@nestjs/common';
+import { ConsoleLogger } from '@nestjs/common';
 import { LoggerLevel, LoggerWrapper } from '@ts-core/common/logger';
 import * as clc from 'cli-color';
 import * as _ from 'lodash';
@@ -10,7 +10,7 @@ export class DefaultLogger extends LoggerWrapper {
     //
     // --------------------------------------------------------------------------
 
-    public isTimeDiffEnabled: boolean = true;
+    public isTimeDifferenceEnabled: boolean = true;
 
     // --------------------------------------------------------------------------
     //
@@ -19,8 +19,8 @@ export class DefaultLogger extends LoggerWrapper {
     // --------------------------------------------------------------------------
 
     constructor(level: LoggerLevel, context?: any) {
-        super(Logger, context, level);
-        this.logger['printMessage'] = this.printMessage;
+        super(new ConsoleLogger(context, { timestamp: true }), context, level);
+        this.logger['printMessages'] = this.printMessages;
     }
 
     // --------------------------------------------------------------------------
@@ -29,52 +29,46 @@ export class DefaultLogger extends LoggerWrapper {
     //
     // --------------------------------------------------------------------------
 
-    private printMessage = (message: any, color: Function, context: string = '', isTimeDiffEnabled: boolean): void => {
-        isTimeDiffEnabled = this.isTimeDiffEnabled;
-
-        let output = _.isObject(message) ? `\n${JSON.stringify(message, null, 4)}\n` : color(message);
+    protected printMessages = (messages: Array<any>, context?: string, logLevel?: LoggerLevel, writeStreamType?: 'stdout' | 'stderr'): void => {
         let date = new Date();
+        let color = this.logger['getColorByLogLevel'](logLevel);
+
         let timestamp = `${date
             .getHours()
             .toString()
             .padStart(2, '0')}:${date
-            .getMinutes()
-            .toString()
-            .padStart(2, '0')}:${date
-            .getSeconds()
-            .toString()
-            .padStart(2, '0')}:${date
-            .getMilliseconds()
-            .toString()
-            .padStart(3, '0')}`;
+                .getMinutes()
+                .toString()
+                .padStart(2, '0')}:${date
+                    .getSeconds()
+                    .toString()
+                    .padStart(2, '0')}:${date
+                        .getMilliseconds()
+                        .toString()
+                        .padStart(3, '0')}`;
 
-        let contextMessage = !_.isNil(context) ? this.yellow(`[${context}] `) : '';
-        let timestampDiff = this.updateAndGetTimestampDiff(isTimeDiffEnabled);
-        process.stdout.write(`${timestamp} ${contextMessage}${output}${timestampDiff}\n`);
+        for (let message of messages) {
+            let output = _.isObject(message) ? `\n${JSON.stringify(message, null, 4)}\n` : color(message);
+            let contextMessage = !_.isNil(context) ? clc.yellow(`[${context}] `) : '';
+            let timestampDiff = this.updateAndGetTimestampDiff();
+            process.stdout.write(`${timestamp} ${contextMessage}${output}${timestampDiff}\n`);
+        }
+    }
+
+    private updateAndGetTimestampDiff(): string {
+        let isNeedTimestamp = this.lastTimestampAt && this.isTimeDifferenceEnabled;
+        let item = isNeedTimestamp ? clc.yellow(` +${Date.now() - this.lastTimestampAt}ms`) : '';
+        this.lastTimestampAt = Date.now();
+        return item;
     };
 
-    private updateAndGetTimestampDiff = (isTimeDiffEnabled: boolean): string => {
-        let includeTimestamp = this.lastTimestamp && isTimeDiffEnabled;
-        let result = includeTimestamp ? this.yellow(` +${Date.now() - this.lastTimestamp}ms`) : '';
-        this.lastTimestamp = Date.now();
-        return result;
-    };
 
-    // --------------------------------------------------------------------------
-    //
-    //  Private Properties
-    //
-    // --------------------------------------------------------------------------
-
-    private get yellow(): (value: string) => string {
-        return clc.xterm(3);
+    private get lastTimestampAt(): number {
+        return this.logger['lastTimestampAt'];
     }
 
-    private get lastTimestamp(): number {
-        return Logger['lastTimestamp'];
+    private set lastTimestampAt(value: number) {
+        this.logger['lastTimestampAt'] = value;
     }
 
-    private set lastTimestamp(value: number) {
-        Logger['lastTimestamp'] = value;
-    }
 }
