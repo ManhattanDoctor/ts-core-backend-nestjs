@@ -2,8 +2,8 @@ import { DynamicModule, Global, Provider } from '@nestjs/common';
 import { ILoggerSettings } from '@ts-core/backend/settings';
 import { Logger, LoggerLevel } from '@ts-core/common/logger';
 import { DefaultLogger } from './DefaultLogger';
+import * as _ from 'lodash';
 
-@Global()
 export class LoggerModule {
     // --------------------------------------------------------------------------
     //
@@ -12,14 +12,14 @@ export class LoggerModule {
     // --------------------------------------------------------------------------
 
     public static forRoot(settings: ILoggerSettings): DynamicModule {
-        const providers: Array<Provider> = [];
-
+        let providers: Array<Provider> = [];
         providers.push({
             provide: Logger,
-            useValue: settings.logger || new DefaultLogger(settings.loggerLevel || LoggerLevel.LOG)
+            useValue: !_.isNil(settings.logger) ? settings.logger : new DefaultLogger(settings.loggerLevel || LoggerLevel.LOG)
         });
 
         return {
+            global: true,
             module: LoggerModule,
             exports: providers,
             providers,

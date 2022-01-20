@@ -6,7 +6,6 @@ import { Transport } from '@ts-core/common/transport';
 import { TransportLocal } from '@ts-core/common/transport/local';
 import { TransportHttp, ITransportHttpSettings } from '@ts-core/common/transport/http';
 
-@Global()
 export class TransportModule {
     // --------------------------------------------------------------------------
     //
@@ -53,10 +52,10 @@ export class TransportModule {
         }
 
         return {
+            global: true,
             module: TransportModule,
-            imports: [],
+            exports: providers,
             providers,
-            exports: providers
         };
     }
 }

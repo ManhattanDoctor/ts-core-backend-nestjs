@@ -24,10 +24,11 @@ export class CacheModule {
             },
         ];
         return {
+            global: true,
             imports: [NestCacheModule.register(settings)],
             module: CacheModule,
-            providers,
-            exports: providers
+            exports: providers,
+            providers
         };
     }
 }
