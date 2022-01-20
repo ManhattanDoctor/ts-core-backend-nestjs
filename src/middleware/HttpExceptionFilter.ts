@@ -39,8 +39,8 @@ export class HttpExceptionFilter implements IExceptionFilter<HttpException> {
     }
 
     protected getDetails(item: HttpException): any {
-        if (!_.isNil(item.message) && _.isArray(item.message.message)) {
-            return item.message.message;
+        if (!_.isNil(item.message) && _.isArray(item.message)) {
+            return item.message;
         }
         return null;
     }

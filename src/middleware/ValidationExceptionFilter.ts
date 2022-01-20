@@ -1,5 +1,5 @@
 import { ArgumentsHost } from '@nestjs/common';
-import { ValidationError } from 'class-validator/validation/ValidationError';
+import { ValidationError } from 'class-validator';
 import { ObjectUtil, TransformUtil, ValidateUtil } from '@ts-core/common/util';
 import * as _ from 'lodash';
 import { ExtendedError } from '@ts-core/common/error';
