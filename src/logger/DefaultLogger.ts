@@ -19,7 +19,7 @@ export class DefaultLogger extends LoggerWrapper {
     // --------------------------------------------------------------------------
 
     constructor(level: LoggerLevel, context?: any) {
-        super(new ConsoleLogger(context, { timestamp: true }), context, level);
+        super(new ConsoleLogger(), context, level);
         this.logger['printMessages'] = this.printMessages;
     }
 

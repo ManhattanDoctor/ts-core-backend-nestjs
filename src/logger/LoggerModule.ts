@@ -15,7 +15,7 @@ export class LoggerModule {
         let providers: Array<Provider> = [];
         providers.push({
             provide: Logger,
-            useValue: !_.isNil(settings.logger) ? settings.logger : new DefaultLogger(settings.loggerLevel || LoggerLevel.LOG)
+            useValue: settings.logger || new DefaultLogger(settings.loggerLevel)
         });
 
         return {
