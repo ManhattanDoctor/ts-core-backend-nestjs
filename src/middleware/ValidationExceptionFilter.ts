@@ -16,8 +16,7 @@ export class ValidationExceptionFilter implements IExceptionFilter<ValidationExc
         if (!ObjectUtil.hasOwnProperties(exception, ['status', 'message', 'response'])) {
             return false;
         }
-        let items = exception.response.message;
-        return _.isArray(items) ? items.every(item => item instanceof ValidationError) : false;
+        return _.isArray(exception.response.message);
     }
 
     public catch(exception: ValidationException, host: ArgumentsHost): void {
