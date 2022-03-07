@@ -14,9 +14,7 @@ export class ExtendedErrorFilter implements IExceptionFilter<ExtendedError> {
 
     public static DEFAULT_ERROR = new InternalServerErrorException();
 
-    public static getCode?: (item: ExtendedError) => number;
-    public static getMessage?: (item: ExtendedError) => string;
-    public static getDetails?: <T>(item: ExtendedError) => T;
+    public static getStatus?: (item: ExtendedError) => number;
 
     // --------------------------------------------------------------------------
     //
@@ -36,6 +34,9 @@ export class ExtendedErrorFilter implements IExceptionFilter<ExtendedError> {
         if (exception.code in HttpStatus) {
             status = exception.code;
         }
+        if (!_.isNil(ExtendedErrorFilter.getStatus)) {
+            status = ExtendedErrorFilter.getStatus(exception);
+        }
         response.status(status).json(TransformUtil.fromClass(exception));
     }
 
@@ -50,23 +51,14 @@ export class ExtendedErrorFilter implements IExceptionFilter<ExtendedError> {
     // --------------------------------------------------------------------------
 
     protected getCode(item: ExtendedError): number {
-        if (!_.isNil(ExtendedErrorFilter.getCode)) {
-            return ExtendedErrorFilter.getCode(item);
-        }
         return !_.isNil(item.code) ? item.code : ExtendedErrorFilter.DEFAULT_ERROR.getStatus();
     }
 
     protected getMessage(item: ExtendedError): string {
-        if (!_.isNil(ExtendedErrorFilter.getMessage)) {
-            return ExtendedErrorFilter.getMessage(item);
-        }
         return !_.isNil(item.message) ? item.message : ExtendedErrorFilter.DEFAULT_ERROR.message;
     }
 
     protected getDetails<T>(item: ExtendedError): T {
-        if (!_.isNil(ExtendedErrorFilter.getDetails)) {
-            return ExtendedErrorFilter.getDetails(item);
-        }
         return item.details;
     }
 }
