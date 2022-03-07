@@ -10,12 +10,12 @@
     },
     "license": "ISC",
     "dependencies": {
-        "@nestjs/common": "^8.2.5",
-        "@nestjs/core": "^8.2.5",
-        "@nestjs/platform-socket.io": "^8.2.6",
-        "@nestjs/websockets": "^8.2.6",
+        "@nestjs/common": "^8.4.0",
+        "@nestjs/core": "^8.4.0",
+        "@nestjs/platform-socket.io": "^8.4.0",
+        "@nestjs/websockets": "^8.4.0",
         "@ts-core/backend": "^2.0.3",
-        "@ts-core/common": "^2.0.4",
+        "@ts-core/common": "^2.0.5",
         "cache-manager": "^3.6.0",
         "cli-color": "^2.0.1"
     },
