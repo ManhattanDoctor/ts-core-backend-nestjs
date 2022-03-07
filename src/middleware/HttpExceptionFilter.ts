@@ -20,7 +20,7 @@ export class HttpExceptionFilter implements IExceptionFilter<HttpException> {
         response.status(error.code).json(TransformUtil.fromClass(error));
     }
 
-    public instanceOf(item: any): item is HttpException {
+    public instanceOf(item: any): boolean {
         return item instanceof HttpException;
     }
 

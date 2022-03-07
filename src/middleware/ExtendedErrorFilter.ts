@@ -31,7 +31,7 @@ export class ExtendedErrorFilter implements IExceptionFilter<ExtendedError> {
         response.status(this.getStatus(exception)).json(TransformUtil.fromClass(exception));
     }
 
-    public instanceOf(item: any): item is ExtendedError {
+    public instanceOf(item: any): boolean {
         return ExtendedError.instanceOf(item);
     }
 
