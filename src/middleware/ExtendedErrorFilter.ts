@@ -14,8 +14,6 @@ export class ExtendedErrorFilter implements IExceptionFilter<ExtendedError> {
 
     public static DEFAULT_ERROR = new InternalServerErrorException();
 
-    public static getStatus?: (item: ExtendedError) => number;
-
     // --------------------------------------------------------------------------
     //
     //  Public Methods
@@ -30,14 +28,7 @@ export class ExtendedErrorFilter implements IExceptionFilter<ExtendedError> {
         exception.message = this.getMessage(exception);
         exception.details = this.getDetails(exception);
 
-        let status = ExtendedErrorFilter.DEFAULT_ERROR.getStatus();
-        if (exception.code in HttpStatus) {
-            status = exception.code;
-        }
-        if (!_.isNil(ExtendedErrorFilter.getStatus)) {
-            status = ExtendedErrorFilter.getStatus(exception);
-        }
-        response.status(status).json(TransformUtil.fromClass(exception));
+        response.status(this.getStatus(exception)).json(TransformUtil.fromClass(exception));
     }
 
     public instanceOf(item: any): item is ExtendedError {
@@ -49,6 +40,14 @@ export class ExtendedErrorFilter implements IExceptionFilter<ExtendedError> {
     //  Protected Methods
     //
     // --------------------------------------------------------------------------
+
+    protected getStatus(item: ExtendedError): number {
+        let value = ExtendedErrorFilter.DEFAULT_ERROR.getStatus();
+        if (item.code in HttpStatus) {
+            value = item.code;
+        }
+        return value;
+    }
 
     protected getCode(item: ExtendedError): number {
         return !_.isNil(item.code) ? item.code : ExtendedErrorFilter.DEFAULT_ERROR.getStatus();
