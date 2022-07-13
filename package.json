@@ -4,11 +4,10 @@
     "description": "Classes and utils for backend based on nestjs",
     "main": "./cjs/public-api.js",
     "module": "./esm/public-api.js",
-    "type": "module",
     "exports": {
         ".": {
             "import": "./esm/public-api.js",
-            "require": "./cjs/public-api.cjs"
+            "require": "./cjs/public-api.js"
         }
     },
     "scripts": {},
@@ -22,8 +21,8 @@
         "@nestjs/core": "^8.4.0",
         "@nestjs/platform-socket.io": "^8.4.0",
         "@nestjs/websockets": "^8.4.0",
-        "@ts-core/backend": "^3.0.1",
-        "@ts-core/common": "^3.0.2",
+        "@ts-core/backend": "^3.0.2",
+        "@ts-core/common": "^3.0.3",
         "cache-manager": "^3.6.0",
         "cli-color": "^2.0.1"
     },
