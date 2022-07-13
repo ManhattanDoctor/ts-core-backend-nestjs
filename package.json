@@ -1,6 +1,6 @@
 {
     "name": "@ts-core/backend-nestjs",
-    "version": "8.1.2",
+    "version": "8.1.3",
     "description": "Classes and utils for backend based on nestjs",
     "main": "./cjs/public-api.js",
     "module": "./esm/public-api.js",
