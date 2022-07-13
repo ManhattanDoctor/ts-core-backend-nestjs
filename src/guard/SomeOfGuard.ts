@@ -1,6 +1,6 @@
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 import { ModuleRef, Reflector } from '@nestjs/core';
-import { PromiseHandler } from '@ts-core/common/promise';
+import { PromiseHandler } from '@ts-core/common';
 import * as _ from 'lodash';
 
 @Injectable()

@@ -1,6 +1,6 @@
-import { DynamicModule, Global, Provider } from '@nestjs/common';
-import { ILoggerSettings } from '@ts-core/backend/settings';
-import { Logger, LoggerLevel } from '@ts-core/common/logger';
+import { DynamicModule, Provider } from '@nestjs/common';
+import { ILoggerSettings } from '@ts-core/backend';
+import { Logger } from '@ts-core/common';
 import { DefaultLogger } from './DefaultLogger';
 import * as _ from 'lodash';
 

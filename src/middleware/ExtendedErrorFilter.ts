@@ -1,6 +1,5 @@
 import { ArgumentsHost, Catch, HttpStatus, InternalServerErrorException } from '@nestjs/common';
-import { ExtendedError } from '@ts-core/common/error';
-import { TransformUtil } from '@ts-core/common/util';
+import { TransformUtil, ExtendedError } from '@ts-core/common';
 import * as _ from 'lodash';
 import { IExceptionFilter } from './IExceptionFilter';
 

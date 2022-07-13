@@ -1,5 +1,5 @@
 import { ConsoleLogger } from '@nestjs/common';
-import { LoggerLevel, LoggerWrapper } from '@ts-core/common/logger';
+import { LoggerLevel, LoggerWrapper } from '@ts-core/common';
 import * as clc from 'cli-color';
 import * as _ from 'lodash';
 

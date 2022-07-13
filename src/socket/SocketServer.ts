@@ -1,6 +1,5 @@
 import { OnGatewayConnection, OnGatewayDisconnect, OnGatewayInit } from '@nestjs/websockets';
-import { ExtendedError } from '@ts-core/common/error';
-import { LoggerWrapper } from '@ts-core/common/logger';
+import { LoggerWrapper, ExtendedError } from '@ts-core/common';
 import * as _ from 'lodash';
 import { Namespace, Socket } from 'socket.io';
 

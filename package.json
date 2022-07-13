@@ -1,8 +1,16 @@
 {
     "name": "@ts-core/backend-nestjs",
-    "version": "8.0.11",
+    "version": "8.1.0",
     "description": "Classes and utils for backend based on nestjs",
-    "main": "index.js",
+    "main": "./cjs/public-api.js",
+    "module": "./esm/public-api.js",
+    "type": "module",
+    "exports": {
+        ".": {
+            "import": "./esm/public-api.js",
+            "require": "./cjs/public-api.cjs"
+        }
+    },
     "scripts": {},
     "author": {
         "name": "Renat Gubaev",
@@ -14,13 +22,13 @@
         "@nestjs/core": "^8.4.0",
         "@nestjs/platform-socket.io": "^8.4.0",
         "@nestjs/websockets": "^8.4.0",
-        "@ts-core/backend": "^2.0.3",
-        "@ts-core/common": "^2.0.5",
+        "@ts-core/backend": "^3.0.1",
+        "@ts-core/common": "^3.0.2",
         "cache-manager": "^3.6.0",
         "cli-color": "^2.0.1"
     },
     "devDependencies": {
-        "gulp-npm-publisher": "^2.0.2"
+        "gulp-npm-module-publisher": "^3.0.0"
     },
     "repository": {
         "type": "git",

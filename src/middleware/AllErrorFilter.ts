@@ -1,5 +1,5 @@
 import { ArgumentsHost, Catch, ExceptionFilter, HttpException, HttpStatus } from '@nestjs/common';
-import { TransformUtil } from '@ts-core/common/util';
+import { TransformUtil } from '@ts-core/common';
 import * as _ from 'lodash';
 import { IExceptionFilter } from './IExceptionFilter';
 

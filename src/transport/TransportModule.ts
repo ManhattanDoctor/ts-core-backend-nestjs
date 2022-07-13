@@ -1,10 +1,6 @@
-import { DynamicModule, Global, Provider } from '@nestjs/common';
-import { ITransportAmqpSettings, TransportAmqp } from '@ts-core/backend/transport/amqp';
-import { ExtendedError } from '@ts-core/common/error';
-import { Logger } from '@ts-core/common/logger';
-import { Transport } from '@ts-core/common/transport';
-import { TransportLocal } from '@ts-core/common/transport/local';
-import { TransportHttp, ITransportHttpSettings } from '@ts-core/common/transport/http';
+import { DynamicModule, Provider } from '@nestjs/common';
+import { ITransportAmqpSettings, TransportAmqp } from '@ts-core/backend';
+import { Logger, Transport, TransportLocal, ITransportHttpSettings, TransportHttp, ExtendedError } from '@ts-core/common';
 
 export class TransportModule {
     // --------------------------------------------------------------------------

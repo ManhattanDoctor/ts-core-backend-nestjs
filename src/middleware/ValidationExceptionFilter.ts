@@ -1,8 +1,7 @@
 import { ArgumentsHost } from '@nestjs/common';
 import { ValidationError } from 'class-validator';
-import { ObjectUtil, TransformUtil, ValidateUtil } from '@ts-core/common/util';
+import { ObjectUtil, ExtendedError, TransformUtil, ValidateUtil } from '@ts-core/common';
 import * as _ from 'lodash';
-import { ExtendedError } from '@ts-core/common/error';
 import { IExceptionFilter } from './IExceptionFilter';
 
 export class ValidationExceptionFilter implements IExceptionFilter<ValidationException> {
