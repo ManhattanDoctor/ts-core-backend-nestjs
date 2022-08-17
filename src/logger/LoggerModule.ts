@@ -17,7 +17,6 @@ export class LoggerModule {
             provide: Logger,
             useValue: settings.logger || new DefaultLogger(settings.loggerLevel)
         });
-
         return {
             global: true,
             module: LoggerModule,
