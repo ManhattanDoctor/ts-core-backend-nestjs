@@ -9,7 +9,7 @@ export class CacheStoreMemory {
     //
     // --------------------------------------------------------------------------
 
-    public static CHECK_DELAY = DateUtil.MILLISECONDS_MINUTE / 10;
+    public static CHECK_DELAY = 30 * DateUtil.MILLISECONDS_SECOND;
 
     // --------------------------------------------------------------------------
     //
