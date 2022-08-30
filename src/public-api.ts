@@ -2,6 +2,7 @@ export * from './ApplicationInjector';
 //
 export * from './cache/Cache';
 export * from './cache/CacheModule';
+export * from './cache/CacheStoreMemory';
 //
 export * from './controller/DefaultController';
 //
