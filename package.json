@@ -1,6 +1,6 @@
 {
     "name": "@ts-core/backend-nestjs",
-    "version": "8.1.10",
+    "version": "9.0.0",
     "description": "Classes and utils for backend based on nestjs",
     "main": "./cjs/public-api.js",
     "module": "./esm/public-api.js",
@@ -17,14 +17,14 @@
     },
     "license": "ISC",
     "dependencies": {
-        "@nestjs/common": "^8.4.0",
-        "@nestjs/core": "^8.4.0",
-        "@nestjs/platform-socket.io": "^8.4.0",
-        "@nestjs/websockets": "^8.4.0",
-        "@ts-core/backend": "^3.0.9",
-        "@ts-core/common": "^3.0.7",
-        "cache-manager": "^3.6.0",
-        "cli-color": "^2.0.1"
+        "@nestjs/common": "^9.3.12",
+        "@nestjs/core": "^9.3.12",
+        "@nestjs/platform-socket.io": "^9.3.12",
+        "@nestjs/websockets": "^9.3.12",
+        "@ts-core/backend": "~3.0.9",
+        "@ts-core/common": "~3.0.14",
+        "cache-manager": "^3.6.3",
+        "cli-color": "^2.0.3"
     },
     "devDependencies": {
         "gulp-npm-module-publisher": "^3.0.0"

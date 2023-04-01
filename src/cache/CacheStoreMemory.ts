@@ -109,7 +109,7 @@ export class CacheStoreMemory {
 //
 // --------------------------------------------------------------------------
 
-export class CacheStoreFactoryMemory implements CacheStoreFactory {
+export class CacheStoreFactoryMemory {
     public create(args: LiteralObject): CacheStore {
         return new CacheStoreMemory() as any;
     }
