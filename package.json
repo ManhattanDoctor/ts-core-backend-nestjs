@@ -21,7 +21,7 @@
         "@nestjs/core": "^9.3.12",
         "@nestjs/platform-socket.io": "^9.3.12",
         "@nestjs/websockets": "^9.3.12",
-        "@ts-core/backend": "~3.0.9",
+        "@ts-core/backend": "~3.0.10",
         "@ts-core/common": "~3.0.14",
         "cache-manager": "^3.6.3",
         "cli-color": "^2.0.3"
