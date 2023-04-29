@@ -13,10 +13,7 @@ export class LoggerModule {
 
     public static forRoot(settings: ILoggerSettings): DynamicModule {
         let providers: Array<Provider> = [];
-        providers.push({
-            provide: Logger,
-            useValue: settings.logger || new DefaultLogger(settings.loggerLevel)
-        });
+        providers.push({ provide: Logger, useValue: settings.logger || new DefaultLogger(settings.loggerLevel) });
         return {
             global: true,
             module: LoggerModule,

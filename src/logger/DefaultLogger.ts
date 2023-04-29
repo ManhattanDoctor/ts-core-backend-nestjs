@@ -62,7 +62,6 @@ export class DefaultLogger extends LoggerWrapper {
         return item;
     };
 
-
     private get lastTimestampAt(): number {
         return this.logger['lastTimestampAt'];
     }
@@ -70,5 +69,4 @@ export class DefaultLogger extends LoggerWrapper {
     private set lastTimestampAt(value: number) {
         this.logger['lastTimestampAt'] = value;
     }
-
 }

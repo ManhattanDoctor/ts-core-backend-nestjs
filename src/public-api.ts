@@ -11,13 +11,13 @@ export * from './guard/SomeOfGuard';
 export * from './logger/DefaultLogger';
 export * from './logger/LoggerModule';
 //
-export * from './middleware/AllErrorFilter';
-export * from './middleware/IExceptionFilter';
-export * from './middleware/ExtendedErrorFilter';
-export * from './middleware/HttpExceptionFilter';
-export * from './middleware/ValidationExceptionFilter';
+export * from './error/filter/AllErrorFilter';
+export * from './error/filter/IExceptionFilter';
+export * from './error/filter/AxiosErrorFilter';
+export * from './error/filter/ExtendedErrorFilter';
+export * from './error/filter/HttpExceptionFilter';
+export * from './error/filter/ValidationExceptionFilter';
 //
 export * from './socket/SocketServer';
 //
-
 export * from './transport/TransportModule';
