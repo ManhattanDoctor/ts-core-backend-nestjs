@@ -19,13 +19,13 @@ export class ExtendedErrorFilter<T extends ExtendedError> implements IExceptionF
     //
     // --------------------------------------------------------------------------
 
-    public static catch(error: ExtendedError, host: ArgumentsHost, status: number): any {
+    public static catch<U, V>(error: ExtendedError<U, V>, host: ArgumentsHost, status: number): any {
         host.switchToHttp().getResponse().status(status).json(TransformUtil.fromClass(error));
     }
 
-    public static getStatus(item: ExtendedError): number {
+    public static getStatus<U, V>(item: ExtendedError<U, V>): number {
         let value = ExtendedErrorFilter.DEFAULT_ERROR.getStatus();
-        if (item.code in HttpStatus) {
+        if (_.isNumber(item.code) && Object.values(HttpStatus).includes(item.code)) {
             value = item.code;
         }
         return value;
