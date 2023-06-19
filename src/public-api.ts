@@ -8,9 +8,10 @@ export * from './controller/DefaultController';
 //
 export * from './guard/SomeOfGuard';
 //
+export * from './application/ModeApplication';
+//
 export * from './logger/DefaultLogger';
 export * from './logger/LoggerModule';
-export * from './logger/LoggerSettings';
 //
 export * from './error/filter/AllErrorFilter';
 export * from './error/filter/IExceptionFilter';
