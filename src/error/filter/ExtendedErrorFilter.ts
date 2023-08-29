@@ -1,5 +1,5 @@
 import { ArgumentsHost, Catch, HttpStatus, InternalServerErrorException } from '@nestjs/common';
-import { TransformUtil, ExtendedError } from '@ts-core/common'
+import { TransformUtil, ExtendedError, isAxiosError, ObjectUtil } from '@ts-core/common'
 import { IExceptionFilter } from './IExceptionFilter';
 import * as _ from 'lodash';
 
@@ -20,6 +20,9 @@ export class ExtendedErrorFilter<T extends ExtendedError> implements IExceptionF
     // --------------------------------------------------------------------------
 
     public static catch<U, V>(error: ExtendedError<U, V>, host: ArgumentsHost, status: number): any {
+        if (isAxiosError(error.details)) {
+            error.details = ObjectUtil.copyProperties(error.details, {}, ['code', 'status', 'message']);
+        }
         host.switchToHttp().getResponse().status(status).json(TransformUtil.fromClass(error));
     }
 
