@@ -1,6 +1,5 @@
-import { DynamicModule, Provider, Global, CacheModuleOptions, CACHE_MANAGER } from '@nestjs/common';
-import { CacheModule as NestCacheModule } from '@nestjs/common';
-import { CACHE_MODULE_OPTIONS } from '@nestjs/common/cache/cache.constants';
+import { DynamicModule, Provider, } from '@nestjs/common';
+import { CacheModule as NestCacheModule, CacheModuleOptions, CACHE_MANAGER, CACHE_MODULE_OPTIONS } from '@nestjs/cache-manager';
 import { Cache } from './Cache';
 
 export class CacheModule {

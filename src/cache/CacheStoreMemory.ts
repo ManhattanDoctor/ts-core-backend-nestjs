@@ -1,4 +1,4 @@
-import { CacheStoreSetOptions, LiteralObject, CacheStoreFactory, CacheStore } from '@nestjs/common';
+import { CacheStoreSetOptions, LiteralObject, CacheStore } from '@nestjs/cache-manager';
 import { DateUtil } from '@ts-core/common';
 import * as _ from 'lodash';
 
