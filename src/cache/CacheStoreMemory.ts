@@ -2,7 +2,7 @@ import { CacheStoreSetOptions, LiteralObject, CacheStore } from '@nestjs/cache-m
 import { DateUtil } from '@ts-core/common';
 import * as _ from 'lodash';
 
-export class CacheStoreMemory {
+export class CacheStoreMemory implements CacheStore {
     // --------------------------------------------------------------------------
     //
     //  Static Properties
@@ -17,7 +17,7 @@ export class CacheStoreMemory {
     //
     // --------------------------------------------------------------------------
 
-    private map: Map<string, CachedValue>;
+    private map: Map<string, CachedValue<any>>;
 
     // --------------------------------------------------------------------------
     //
@@ -36,24 +36,19 @@ export class CacheStoreMemory {
     //
     // --------------------------------------------------------------------------
 
-    private getTtl<T>(value: T, options: CacheStoreSetOptions<T>): number {
-        if (_.isNumber(options)) {
-            return options;
-        }
-        if (_.isNumber(options.ttl)) {
-            return options.ttl;
-        }
-        return options.ttl(value);
+    protected getTtl<T>(value: T, options: CacheStoreSetOptions<T>): number {
+        return _.isNumber(options.ttl) ? options.ttl : options.ttl(value);
     }
 
-    private isExpired(item: CachedValue): boolean {
-        return !_.isNil(item.expired) ? item.expired < Date.now() : false;
+    protected isExpired<T>(item: CachedValue<T>, date: Date): boolean {
+        return !_.isNil(item.expired) ? item.expired < date.getTime() : false;
     }
 
-    private check = (): void => {
+    protected check = (): void => {
+        let date = new Date();
         this.map.forEach((item, key) => {
-            if (this.isExpired(item)) {
-                this.map.delete(key);
+            if (this.isExpired(item, date)) {
+                this.del(key);
             }
         });
     }
@@ -64,42 +59,18 @@ export class CacheStoreMemory {
     //
     // --------------------------------------------------------------------------
 
-    public get<T>(key: string, options: CacheStoreSetOptions<T>, callback: Function): void {
-        if (_.isFunction(options)) {
-            callback = options
-        }
+    public get<T>(key: string): T {
         let item = this.map.get(key);
-        if (_.isNil(item)) {
-            callback(null, undefined);
-            return;
-        }
-        if (this.isExpired(item)) {
-            this.map.delete(key);
-            callback(null, undefined);
-            return;
-        }
-        callback(null, item.value);
+        return !_.isNil(item) ? item.value : null;
     }
 
-    public set<T>(key: string, value: T, options: CacheStoreSetOptions<T>, callback: Function): void {
-        if (_.isFunction(options)) {
-            callback = options
-        }
+    public set<T>(key: string, value: T, options: CacheStoreSetOptions<T>): void {
         let ttl = this.getTtl(value, options);
-        let item: CachedValue = { value, expired: ttl > 0 ? Date.now() + ttl : null };
-        this.map.set(key, item);
-        callback(null, true);
+        this.map.set(key, { value, expired: ttl > 0 ? Date.now() + ttl : null });
     }
 
-    public del<T>(key: string, options: CacheStoreSetOptions<T>, callback: Function): void {
-        if (_.isFunction(options)) {
-            callback = options
-        }
-        if (!_.isFunction(callback)) {
-            callback = (): void => { };
-        }
+    public del(key: string): void {
         this.map.delete(key);
-        callback(null, null)
     }
 }
 
@@ -111,7 +82,7 @@ export class CacheStoreMemory {
 
 export class CacheStoreFactoryMemory {
     public create(args: LiteralObject): CacheStore {
-        return new CacheStoreMemory() as any;
+        return new CacheStoreMemory();
     }
 }
 
@@ -121,7 +92,7 @@ export class CacheStoreFactoryMemory {
 //
 // --------------------------------------------------------------------------
 
-interface CachedValue {
-    value: any;
+interface CachedValue<T> {
+    value: T;
     expired?: number;
 }
