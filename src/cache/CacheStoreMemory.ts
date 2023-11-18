@@ -36,7 +36,10 @@ export class CacheStoreMemory implements CacheStore {
     //
     // --------------------------------------------------------------------------
 
-    protected getTtl<T>(value: T, options: CacheStoreSetOptions<T>): number {
+    protected getTtl<T>(value: T, options: CacheStoreSetOptions<T> | number): number {
+        if (_.isNumber(options)) {
+            return options;
+        }
         return _.isNumber(options.ttl) ? options.ttl : options.ttl(value);
     }
 
@@ -61,10 +64,10 @@ export class CacheStoreMemory implements CacheStore {
 
     public get<T>(key: string): T {
         let item = this.map.get(key);
-        return !_.isNil(item) ? item.value : null;
+        return item?.value;
     }
 
-    public set<T>(key: string, value: T, options: CacheStoreSetOptions<T>): void {
+    public set<T>(key: string, value: T, options: CacheStoreSetOptions<T> | number): void {
         let ttl = this.getTtl(value, options);
         this.map.set(key, { value, expired: ttl > 0 ? Date.now() + ttl : null });
     }
