@@ -62,17 +62,17 @@ export class CacheStoreMemory implements CacheStore {
     //
     // --------------------------------------------------------------------------
 
-    public get<T>(key: string): T {
+    public async get<T>(key: string): Promise<T> {
         let item = this.map.get(key);
         return item?.value;
     }
 
-    public set<T>(key: string, value: T, options: CacheStoreSetOptions<T> | number): void {
+    public async set<T>(key: string, value: T, options: CacheStoreSetOptions<T> | number): Promise<void> {
         let ttl = this.getTtl(value, options);
         this.map.set(key, { value, expired: ttl > 0 ? Date.now() + ttl : null });
     }
 
-    public del(key: string): void {
+    public async del(key: string): Promise<void> {
         this.map.delete(key);
     }
 }
