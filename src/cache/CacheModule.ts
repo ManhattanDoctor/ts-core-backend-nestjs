@@ -2,7 +2,7 @@ import { DynamicModule, Provider, } from '@nestjs/common';
 import { CacheModule as NestCacheModule, CacheModuleOptions, CACHE_MANAGER, CACHE_MODULE_OPTIONS } from '@nestjs/cache-manager';
 import { Cache } from './Cache';
 import * as _ from 'lodash';
-import { CacheStoreFactoryMemory, CacheStoreMemory } from './CacheStoreMemory';
+import { CacheStoreFactoryMemory } from './CacheStoreMemory';
 
 export class CacheModule {
     // --------------------------------------------------------------------------
