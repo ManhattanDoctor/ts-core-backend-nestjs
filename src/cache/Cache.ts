@@ -1,4 +1,4 @@
-import { Store, WrapTTL, Milliseconds, Cache as CaseBase } from 'cache-manager';
+import { Store, WrapTTL, Milliseconds, Cache as CaseBase, ErrorEventHandler } from 'cache-manager';
 
 export abstract class Cache<S extends Store = Store> implements CaseBase<S> {
     abstract set: (key: string, value: unknown, ttl?: Milliseconds) => Promise<void>;
@@ -7,4 +7,7 @@ export abstract class Cache<S extends Store = Store> implements CaseBase<S> {
     abstract reset: () => Promise<void>;
     abstract wrap<T>(key: string, fn: () => Promise<T>, ttl?: WrapTTL<T>): Promise<T>;
     store: S;
+
+    on: <T>(event: 'error', handler: ErrorEventHandler<T>) => void;
+    removeListener: <T>(event: 'error', handler: ErrorEventHandler<T>) => void;
 }
