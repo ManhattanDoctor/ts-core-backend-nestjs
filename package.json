@@ -17,15 +17,15 @@
     },
     "license": "ISC",
     "dependencies": {
-        "@nestjs/cache-manager": "^2.1.1",
-        "@nestjs/common": "^10.2.8",
-        "@nestjs/core": "^10.2.8",
-        "@nestjs/platform-socket.io": "^10.2.8",
-        "@nestjs/websockets": "^10.2.8",
-        "@ts-core/backend": "~3.0.18",
-        "@ts-core/common": "~3.0.42",
-        "cache-manager": "^5.3.1",
-        "cli-color": "^2.0.3"
+        "@nestjs/cache-manager": "^3.0.1",
+        "@nestjs/common": "^11.1.0",
+        "@nestjs/core": "^11.1.0",
+        "@nestjs/platform-socket.io": "^11.1.0",
+        "@nestjs/websockets": "^11.1.0",
+        "@ts-core/backend": "~3.0.28",
+        "@ts-core/common": "~3.0.60",
+        "cache-manager": "^6.4.3",
+        "cli-color": "^2.0.4"
     },
     "devDependencies": {
         "gulp-npm-module-publisher": "^3.0.0"

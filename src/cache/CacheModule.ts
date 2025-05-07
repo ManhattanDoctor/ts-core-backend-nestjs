@@ -2,7 +2,6 @@ import { DynamicModule, Provider, } from '@nestjs/common';
 import { CacheModule as NestCacheModule, CacheModuleOptions, CACHE_MANAGER, CACHE_MODULE_OPTIONS } from '@nestjs/cache-manager';
 import { Cache } from './Cache';
 import * as _ from 'lodash';
-import { CacheStoreFactoryMemory } from './CacheStoreMemory';
 
 export class CacheModule {
     // --------------------------------------------------------------------------
@@ -12,9 +11,6 @@ export class CacheModule {
     // --------------------------------------------------------------------------
 
     public static forRoot(settings?: CacheModuleOptions): DynamicModule {
-        if (_.isNil(settings)) {
-            settings = { store: new CacheStoreFactoryMemory() };
-        }
         const providers: Array<Provider> = [
             {
                 provide: CACHE_MODULE_OPTIONS,
