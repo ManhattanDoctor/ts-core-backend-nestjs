@@ -1,4 +1,4 @@
-import { ArgumentsHost, Catch, HttpStatus, InternalServerErrorException } from '@nestjs/common';
+import { ArgumentsHost, Catch, HttpException, HttpStatus, InternalServerErrorException } from '@nestjs/common';
 import { TransformUtil, ExtendedError, isAxiosError, ObjectUtil } from '@ts-core/common'
 import { IExceptionFilter } from './IExceptionFilter';
 import * as _ from 'lodash';
@@ -27,11 +27,21 @@ export class ExtendedErrorFilter<T extends ExtendedError> implements IExceptionF
     }
 
     public static getStatus<U, V>(item: ExtendedError<U, V>): number {
+        if (item instanceof HttpException) {
+            return item.getStatus();
+        }
+        if (ExtendedErrorFilter.hasStatus(item)) {
+            return item.status;
+        }
         let value = ExtendedErrorFilter.DEFAULT_ERROR.getStatus();
         if (_.isNumber(item.code) && Object.values(HttpStatus).includes(item.code)) {
             value = item.code;
         }
         return value;
+    }
+
+    private static hasStatus(item: any): item is IErrorWithNumericStatus {
+        return _.isNumber(item?.status) && Object.values(HttpStatus).includes(item.status);
     }
 
     // --------------------------------------------------------------------------
@@ -72,4 +82,8 @@ export class ExtendedErrorFilter<T extends ExtendedError> implements IExceptionF
     protected getDetails<U = any>(item: T): U {
         return item.details;
     }
+}
+
+export interface IErrorWithNumericStatus {
+    status: number;
 }
