@@ -1,7 +1,7 @@
 {
     "name": "@ts-core/backend-nestjs",
     "version": "11.0.2",
-    "description": "Classes and utils for backend based on nestjs",
+    "description": "NestJS building blocks for backend applications: dependency management, error handling, logging, websockets and command transport on top of @ts-core/backend",
     "main": "./cjs/public-api.js",
     "module": "./esm/public-api.js",
     "exports": {
@@ -35,7 +35,17 @@
         "url": "git+https://github.com/ManhattanDoctor/ts-core-backend-nestjs.git"
     },
     "keywords": [
-        "typescript"
+        "typescript",
+        "nestjs",
+        "backend",
+        "nodejs",
+        "dependency-injection",
+        "logger",
+        "error-handling",
+        "websocket",
+        "socket",
+        "transport",
+        "microservices"
     ],
     "bugs": {
         "url": "https://github.com/ManhattanDoctor/ts-core-backend-nestjs/issues"
